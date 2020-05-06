@@ -1,0 +1,45 @@
+﻿    @using FirstDbExercise.Models
+   @model IndexViewModel
+
+     <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>To Do</title>
+    </head>
+    <body>
+
+        <h1>Please provide information which work need to be edit and change </h1>
+        @using (Html.BeginForm("SaveEditInDatabase", "Home", FormMethod.Post))
+        {
+            <label for="name"> To do work to edit: </label>
+            <input type="text" name="title" id="name" value="@Model.Todo.Title" />
+            <input type="submit" value="Submit" /><br />
+
+            <label for="description"> Description of work to edit: </label>
+            <input type="text" name="Description" id="description" />
+            <input type="submit" value="Submit" /><br />
+
+            <label for="urgent"> Is it urgent?: </label>
+            <input type="checkbox" name="IsUrgent" id="urgent" value="true" /><br />
+
+            <label for="done"> Is it done?: </label>
+            <input type="checkbox" name="IsDone" id="done" value="true" />
+
+            <input type="hidden" name="Id" value="@Model.Todo.Id" />
+
+
+            <h2>Who will do this Work?</h2>
+
+            <label for="worker"> Add worker: </label>
+            <select name="AsigneeId" id="AsigneeId" asp-for="AsigneeId" >
+                @foreach (var worker in Model.Asignees)
+                {
+                    <option value="@worker.Id">@worker.Name</option>
+                }
+
+            </select>
+           
+            <input type="submit" value="Submit" /><br />
+        }
+
+    </body>
+    </html>

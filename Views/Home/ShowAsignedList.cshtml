@@ -1,0 +1,39 @@
+﻿@using FirstDbExercise
+@model List<ToDo>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>To Do</title>
+    <link rel="stylesheet" type="text/css" href="~/StyleSheet.css" />
+</head>
+<body>
+   
+    <table>
+
+
+        <tr class="table-header">
+
+            <td>Title</td>
+            <td>Descrition</td>
+            <td>Is it urgent?</td>
+            <td>Is it done?</td>
+
+        </tr>
+
+        @foreach (var todo in Model)
+        {
+            <tr class="data">
+                <td>@todo.Title</td>
+                <td>@todo.Description</td>
+                <td>@todo.IsUrgent</td>
+                <td>@todo.IsDone</td>
+
+            </tr>
+
+        }
+
+
+
+
+    </table>
+</body>
+</html>

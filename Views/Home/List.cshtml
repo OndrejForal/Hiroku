@@ -1,0 +1,64 @@
+﻿@using FirstDbExercise
+@model List<ToDo>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>To Do</title>
+    <link rel="stylesheet" type="text/css" href="~/StyleSheet.css" />
+</head>
+<body>
+    <header>
+
+        @Html.ActionLink("Add work to do", "AddToDatabase", "Home")<br />
+        @Html.ActionLink("Asignees list", "ListOfAssignes", "Home")<br />
+    </header>
+
+    <table>
+
+        <tr class="table-header">
+            <td>Id</td>
+            <td>Title</td>
+            <td>Descrition</td>
+            <td>Is it urgent?</td>
+            <td>Is it done?</td>
+            <td>Delete your task?</td>
+            <td>Edit your task</td>
+            <td>Worker name</td>
+            <td>Worker Email</td>
+        </tr>
+
+        @foreach (var toDo in Model)
+        {
+    <tr class="data">
+
+        <td>@toDo.Id</td>
+        <td>@toDo.Title</td>
+        <td>@toDo.Description</td>
+        <td>@toDo.IsUrgent</td>
+        <td>@toDo.IsDone</td>
+        <td>@Html.ActionLink("Delete", "DeleteFromDatabase", "Home", new { id = toDo.Id })</td>
+        <td>@Html.ActionLink("Edit", "EditInDatabase", "Home", new { id = toDo.Id })</td>
+        <td>@Html.ActionLink(toDo.Asignee.Name, "ShowAsignedList", "Home", new { id = toDo.Asignee.Id })</td>
+        <td>@toDo.Asignee.Email</td>
+    </tr>
+
+
+        }
+
+
+    </table>
+
+    @using (Html.BeginForm("SearchInDB", "Home", FormMethod.Post))
+    {
+        <label for="search"> Search In To do database: </label>
+        <input type="text" name="searchedText" id="search" />
+        <input type="submit" value="Search" />
+        <br />
+    }
+
+
+
+
+</body>
+</html>
